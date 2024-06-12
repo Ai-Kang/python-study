@@ -88,6 +88,29 @@ print(str1[0])  # 索引从0开始 a
 print(str1[0:3])  # 切片 abc 包左不包右
 print(str1[0:3:2])  # 切片 ac 包左不包右,步长
 ```
+## 序列
+**序列是有序排列并且可以通过下标获取内容的列表，包括列表、range、元组和字符串**
+## 序列通用函数
+```pycon
+len(item)       计算容器中元素的个数
+del(item)       删除元素
+max(item)       返回容器中最大值
+min(item)       返回容器中最小值
+item[0:10:2]    切片[开始索引:结束索引:步长]  左包又不包
+```
+## 序列通用运算符
+```pycon
++       [1,2] + [3,4]   结果  [1,2,3,4]
+*       ['hi'] * 4      结果  ['hi','hi','hi','hi']
+in      3 in (1,2,3,4)  结果  bool   判断元素是否存在
+not in  3 in (1,2,3,4)  结果  bool   判断元素是否不存在
+<       大小比较         结果  bool
+<=      大小比较         结果  bool
+==      大小比较         结果  bool
+>       大小比较         结果  bool
+>=      大小比较         结果  bool
+```
+
 
 ```python
 # complex 复数
@@ -195,4 +218,54 @@ not in    在指定的序列里查找数据返回取反bool   3 in (1,2,3,4)
 ```text
 is         判断两个标识符是否引用同一个对象返回bool  a,b = 1,1  (a is b)  
 is not     is取反
+```
+# 分支语句
+## if分支
+```pycon
+# if选择语句
+weather = "下雨"
+if weather == "下雨":
+    print("下雨了")
+elif weather == "晴天":
+    print("天气良好")
+else:
+    print("未知天气")
+```
+## match 选择语句
+```pycon
+x = 10
+match x:
+    case 1:
+        print('x is 1')
+    case 2:
+        print('x is 2')
+    case _:
+        print('x is not 1 2')
+```
+# 循环语句
+## for循环
+```pycon
+for i in range(10):
+    print(i)
+    if i == 5:
+        continue
+    if i == 3:
+        break
+else:
+    print("没有执行过break")
+```
+## while循环
+```pycon
+a = 10
+while a > 0:
+    a = a - 1
+    if a == 5:
+        # 跳过循环
+        continue
+    print(a)
+    if a == 3:
+        # 结束循环
+        break
+else:
+    print("没有执行过break")
 ```
