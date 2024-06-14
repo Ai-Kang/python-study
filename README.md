@@ -97,6 +97,8 @@ del(item)       删除元素
 max(item)       返回容器中最大值
 min(item)       返回容器中最小值
 item[0:10:2]    切片[开始索引:结束索引:步长]  左包又不包
+enumerate(item)
+for i,v in enumerate(item)
 ```
 ## 序列通用运算符
 ```pycon
@@ -110,34 +112,127 @@ not in  3 in (1,2,3,4)  结果  bool   判断元素是否不存在
 >       大小比较         结果  bool
 >=      大小比较         结果  bool
 ```
-
+### list 列表
+```python
+# list 列表
+g = [1, 2, "a", "b"]
+print(type(g))
+h = list()
+# 取出元素,支持切片
+print(g[2])
+# 添加一个元素
+g.append([1, 2])
+# 追加一个列表
+g.extend([1, 2, 3])
+# 插入元素
+g.insert(2, "aaa")
+# 根据索引删除元素
+g.pop(3)
+# 根据元素删除第一个元素
+g.remove("b")
+# 清空
+g.clear()
+```
+### tuple 元组
+```python
+# tuple 元组，元素不允许改变
+h = (1, "2", "a")
+print(type(h))
+```
+### range
+```pycon
+# range函数,生成列表
+print(type(range(0,6,1)))
+```
+### str 字符串
+```pycon
+# str 字符串
+s1 = "hello worf"
+print(s1 + " abc")
+print(len(s1))
+# 是否都小写
+print(s1.islower())
+# 是否都大写
+print(s1.isupper())
+# 计数
+print(s1.count('o'))
+# 去除前后空格
+print(s1.strip())
+# 分割字符串
+print(s1.split(' '))
+# 查找元素第一次出现的位置
+print(s1.find(' '))
+# 使用字符串连接数据
+print('*'.join(['11','22','33','44']))
+# 转换小写
+print(s1.lower())
+# 转换大写
+print(s1.upper())
+```
+### dict字典
+```python
+# dict 字典 无序
+d = {"name": "aikang", "age": 23}
+print(type(d))
+print(d["name"])
+d["name"] = 'zp'
+print(d["name"])
+for k,v in d.items():
+    print(k,v)
+for k in d.keys():
+    print(k)
+for v in d.values():
+    print(v)
+# 删除元素
+d.pop("age")
+print(d.get("name"))
+# 从最后删除一个
+d.popitem()
+# 字典拼接
+d.update({"to":"day"})
+print(d)
+# 清空
+d.clear()
+```
+### set 集合
+```python
+# set 集合,不重复序列
+j = {1, "a", 3}
+print(type(j))
+s = set()
+s = {1, 2, 3, 4, 5, 6,1}
+# 追加一个集合
+s.update({7,8})
+# 删除一个元素
+s.remove(2)
+# 增加一个元素
+s.add(9)
+s.add(1)
+# 删除一个元素
+s.pop()
+s1 = {2,4,6,8,10}
+# 获取交集
+print(s & s1)
+# 获取并集
+print(s | s1)
+# 清空
+s.clear()
+print(s)
+```
+## 可变类型与不可变类型
+```pycon
+# 不可变类型：
+    # 1: 数字类型
+    # 2：字符串类型
+    # 3：元组
+    # 4：布尔值
+```
 
 ```python
 # complex 复数
 f = 3.14j
 print(type(f))
 ```
-```python
-# list 列表
-g = [1, 2, "a", "b"]
-print(type(g))
-```
-```python
-# tuple 元组
-h = (1, "2", "a")
-print(type(h))
-```
-```python
-# set 集合,不重复序列
-j = {1, "a", 3}
-print(type(j))
-```
-```python
-# dict 字典
-l = {"name": "aikang", "age": 23}
-print(type(l))
-```
-
 # 打印语句
 ```text
 # 创建变量
@@ -268,4 +363,23 @@ while a > 0:
         break
 else:
     print("没有执行过break")
+```
+# 异常
+```pycon
+try:
+    a = 2 / 0
+    print(a)
+except Exception as e:
+    print("进入异常")
+    print(e)
+else:
+    print("没有异常执行，可不写")
+finally:
+    print("有没有异常都执行")
+    passwd = input("请输入密码")
+    try:
+        if len(passwd) < 8:
+            raise Exception("密码长度不够")
+    except Exception as e:
+        print(e)
 ```
