@@ -629,3 +629,150 @@ with open("data.csv",mode="r",encoding="gbk") as f:
     for e in csv_reader:
         print(e)
 ```
+# 面向对象
+## 类的定义
+```python
+"""
+class ClassName(继承的类)
+    类成员
+    类方法
+    等...
+"""
+# 定义类
+class Player(object):
+    # 类属性
+    number = 10
+
+    # 初始化构造函数
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    # 实例方法
+    def show(self):
+        print('Player %s is %s years old' % (self.name, self.age))
+
+    # 类方法
+    @classmethod
+    def play(cls):
+        print('Player %s is playing' % cls.__name__)
+
+    # 静态方法
+    @staticmethod
+    def isvalid(**kwargs):
+        return True
+
+# 创建类
+player1 = Player("name1", 27)
+print(player1.name)
+print(player1.age)
+# 获取所有属性
+print(player1.__dict__)
+# 调用实例方法
+player1.show()
+# 调用类方法
+Player.play()
+print(Player.isvalid())
+```
+## 继承
+```python
+# 类继承
+class PlayerChild1(Player):
+    # 构造函数
+    def __init__(self, name, age):
+        super(PlayerChild1, self).__init__(name, age)
+    # 重写
+    def show(self):
+        print('Player %s is %s years old' % (self.name, self.age))
+
+    # 特有方法
+    def test1(self):
+        print('Player %s is %s years old' % (self.name, self.age))
+
+#创建调用
+playerChild1 = PlayerChild1("name1", 27)
+print(playerChild1.name)
+```
+## 多态
+```python
+class Animal():
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def speak(self):
+        print("动物叫")
+
+
+class Dog(Animal):
+    def __init__(self, name, age):
+        super().__init__(name, age)
+
+    def speak(self):
+        print("汪汪汪")
+
+
+class Cat(Animal):
+    def __init__(self, name, age):
+        super().__init__(name, age)
+
+    def speak(self):
+        print("喵喵喵")
+
+
+def speak(object):
+    object.speak()
+
+
+speak(Cat("name", 23))
+speak(Dog("name", 23))
+```
+## 封装
+```python
+# 封装
+class User(object):
+    def __init__(self, name, age):
+        # 下滑线代表封装，不允许直接操作
+        self.__name = name
+        self.__age = age
+
+    # @name.setter 使用装饰器@property后可以这种赋值
+    def set_name(self, name):
+        self.__name = name
+
+    def set_age(self, age):
+        self.__age = age
+
+    # @property 函数转成了变量，调用时不能加()
+    def get_name(self):
+        return self.__name
+
+    @property
+    def get_age(self):
+        return self.__age
+
+user1 = User('John', 25)
+print(user1.get_name())
+
+```
+## 魔法方法
+```python
+class Animal(object):
+    # 构造函数
+    def __init__(self, name):
+        print("__init__被调用")
+        self.name = name
+
+    # toStr方法
+    def __str__(self):
+        return self.name
+
+    # 调用+号时的重写
+    def __add__(self, other):
+       return self.name + other.name
+
+    # 比较函数
+    def __eq__(self, other):
+        return self.name == other.name
+animal = Animal("JOJO")
+```
