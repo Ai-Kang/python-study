@@ -570,3 +570,62 @@ pip install 第三方库名称
 # 设置源
 pip config set global.index-url https://xxxx
 ```
+# 文件操作
+## 文件基础操作
+### 读取文件
+```python
+import os
+
+# 打开文件
+"""
+mode: 
+    r: 只读，默认
+    w: 只写
+    a: 追加
+    r+: 读写
+    w+: 读写，如果文件存在则覆盖
+    a+: 读写，如果文件存在则指针指向尾部，如果不存在则新建
+    b: 二进制文件操作 rb、wb等
+"""
+f1 = open("./test1.txt", mode="r", encoding="utf-8")
+# 读取文件
+# context1 = f1.read()
+# 传入5则读取五个字符，包括换行符
+context1 = f1.read(5)
+print(context1)
+# 读取一行
+line = f1.readline()
+print(line)
+# 关闭文件
+f1.close()
+
+# 使用os获取当前文件路径
+pwd = os.getcwd()
+print(pwd)
+```
+### 写入文件
+```python
+# 打开文件
+f1 = open("test1.txt",encoding="utf-8",mode="a+")
+# 写入文件内容
+f1.write("哈哈哈")
+f1.writelines(["呵呵呵1\n","呵呵呵2\n"])
+# 关闭文件
+f1.close()
+```
+### with
+```python
+# 会自动关闭文件
+with open("test1.txt", "a+",encoding="utf-8") as f:
+    f.write("test")
+```
+### 读取csv
+```python
+# 读取csv
+import csv
+
+with open("data.csv",mode="r",encoding="gbk") as f:
+    csv_reader = csv.reader(f)
+    for e in csv_reader:
+        print(e)
+```
