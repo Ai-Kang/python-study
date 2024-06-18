@@ -776,3 +776,69 @@ class Animal(object):
         return self.name == other.name
 animal = Animal("JOJO")
 ```
+# requests 爬虫
+# 基础使用
+```python
+# request模块学习
+"""
+urllib: 比较古老
+request:
+    环境安装：pip install requests
+    1: 指定url
+    2： 发起请求
+    3: 获取响应数据
+    4: 解析数据
+"""
+import  requests
+if __name__ == '__main__':
+    # 指定url
+    url  = 'https://www.sogou.com'
+    # 发起请求
+    r = requests.get(url=url)
+    # 获取响应数据
+    context = r.text
+    # 存储到本地文件
+    with open('sogou.html', 'w', encoding='utf-8') as f:
+        f.write(context)
+    print("爬取成功")
+```
+## 案例1-获取html源码
+```python
+import requests
+
+if __name__ == '__main__':
+    # 指定url
+    url = 'https://cn.bing.com/search'
+    # 请求头伪装
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0"
+    }
+    params = {
+        "q": "艾康"
+    }
+    get = requests.get(url=url, params=params, headers=headers)
+    print(get.text)
+```
+## 案例2-百度翻译
+```python
+import requests
+import json
+
+if __name__ == '__main__':
+    # 指定url
+    url = 'https://fanyi.baidu.com/sug'
+    # 请求头伪装
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0"
+    }
+    kw = input("请输入要翻译的内容：")
+    data = {
+        "kw": kw
+    }
+    response = requests.post(url=url, data=data, headers=headers)
+    response_json = response.json()
+    json_file = open('baidu_%s.json' % kw, 'w', encoding='utf-8')
+    json.dump(response_json.get("data"), json_file, ensure_ascii=False)
+    print(response_json)
+    json_file.close()
+```
