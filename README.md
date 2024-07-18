@@ -101,7 +101,7 @@ enumerate(item)
 for i,v in enumerate(item)
 ```
 ## 序列通用运算符
-```pycon
+```text
 +       [1,2] + [3,4]   结果  [1,2,3,4]
 *       ['hi'] * 4      结果  ['hi','hi','hi','hi']
 in      3 in (1,2,3,4)  结果  bool   判断元素是否存在
@@ -842,3 +842,4 @@ if __name__ == '__main__':
     print(response_json)
     json_file.close()
 ```
+# 机器学习
